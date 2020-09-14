@@ -1,0 +1,8 @@
+.head
+	.logo
+		a(href='/profile') Управление магазином 1.0
+	- if(!auth)
+		a(href='/logout')
+			img#logout(src='logout.png' alt='logout')
+		a(href='/profile')
+			#profile #{username}

@@ -1,0 +1,36 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Заказ ##{order.id}
+  link(rel='stylesheet' href='main.css')
+  link(href='https://fonts.googleapis.com/css?family=Amaranth|Philosopher&display=swap' rel='stylesheet')
+  script(src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js')
+  script(type='text/javascript' src='main.js')
+body
+  include includes/header
+  .body
+    .wrap
+      h2 Заказы
+      .text2 Заказчик: #{order.customer}
+      .text2 Адрес: #{order.address}
+      .text2 Статус: #{order.status}
+      .text2 Продавец: #{order.user}
+      .text2 Дата: #{order.date}
+      -if(order.additional)
+        .text2 Дополнительно: #{order.additional}
+      .text2 Общая сумма заказа: #{order.sum} рублей
+      table
+        thead
+          tr
+            td="Наименование"
+            td="Размер"
+            td="Количество"
+            td="Сумма"
+        tbody
+          -shopList.forEach(function(e){
+            tr
+              td #{e.good}
+              td #{e.size}
+              td #{e.quantity}
+              td #{e.sumgood}
+        -})

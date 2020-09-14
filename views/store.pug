@@ -1,0 +1,60 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title #{username}
+  link(rel='stylesheet' href='main.css')
+  link(href='https://fonts.googleapis.com/css?family=Amaranth|Philosopher&display=swap' rel='stylesheet')
+  script(src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js')
+  script(type='text/javascript' src='main.js')
+body
+  include includes/header
+  .body
+    .wrap
+      h2 Возможности
+      include includes/messages
+      div
+        ul
+          li#addGood Добавить товар
+      h2 Товары
+      include includes/messages
+      -if(!goods[0])
+        div Ничего не найдено
+      -else
+        table
+          thead
+            tr
+              td id
+              td Наименование
+              td Размер
+              td Количество
+              td Артикул
+              td Цена
+              td.noSort Изображение
+              -if(role != 'manager')
+                td
+          tbody
+            -goods.forEach(function(e){
+              tr
+                td #{e.id}
+                td #{e.name}
+                td #{e.size}
+                td #{e.quantity}
+                td #{e.art}
+                td #{e.price}
+                td.img
+                  img(src='' + e.img alt='' + e.name)
+                -if(role != 'manager')
+                  td Изменить
+            -})
+  #over.hide
+  .form.hide
+    form#changeGood(action='goodList/changeGood' method='post')
+          .text Измените данные товара
+          input(type='number' name='id' placeholder='id' required='')
+          input(type='text' name='name' placeholder='Название' required='')
+          input(type='text' name='art' placeholder='Артикул' required='')
+          input(type='number' name='size' placeholder='Размер' required='')
+          input(type='number' name='quantity' placeholder='Количество' required='')
+          input(type='number' name='price' placeholder='Цена' required='')
+          input(type='text' name='img' placeholder='Ссылка на картинку' required='')
+          input(type='submit' value='Изменить')

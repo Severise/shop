@@ -1,0 +1,38 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Заказ ##{id}
+  link(rel='stylesheet' href='main.css')
+  link(href='https://fonts.googleapis.com/css?family=Amaranth|Philosopher&display=swap' rel='stylesheet')
+  script(src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js')
+  script(type='text/javascript' src='main.js')
+body
+  .head
+    include includes/header
+  .body
+    .wrap
+      h2 Заказ ##{id}
+      .text2 Время создания #{date}
+      include includes/messages
+  .form
+    .text Введите данные заказа
+    form#completeOrder(action='/completeOrder' method='post')
+      input(type='number' name='id' placeholder='id' value='' + id required='')
+      select(name='customer' id='cust')
+        option Выберите покупателя
+        -customers.forEach(function(e){
+          option(value ='' + e.id) #{e.name}
+        -})
+      select(name='addr')
+        -customers.forEach(function(e){
+          option(value ='' + e.id) #{e.address}
+        -})
+      select(name='disc')
+        -customers.forEach(function(e){
+          option(value ='' + e.id) #{e.disc}
+        -})
+      input(type='text' name='address' placeholder='Адрес' required='')
+      input(type='text' name='additional' placeholder='Пожелания')
+      input(type='number' name='sum' placeholder='Сумма' value='' + sum required='')
+      .text Сумма заказа: #{sum}
+      input(type='submit' value='Подтвердить') 

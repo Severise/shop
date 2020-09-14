@@ -1,0 +1,50 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Список пользователей
+  link(rel='stylesheet' href='main.css')
+  link(href='https://fonts.googleapis.com/css?family=Amaranth|Philosopher&display=swap' rel='stylesheet')
+  script(src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js')
+  script(type='text/javascript' src='main.js')
+body
+  .head
+    include includes/header
+  .body
+    .wrap
+      h2 Пользователи ИС
+      include includes/messages
+      -if(!users[0])
+        div Ничего не найдено
+      -else
+        table
+          thead
+            tr
+              td id
+              td Имя
+              td Логин
+              td email
+              td Роль
+              td
+          tbody
+            -users.forEach(function(e){
+              tr
+                td #{e.id}
+                td #{e.name}
+                td #{e.login}
+                td #{e.email}
+                td #{e.role}
+                td Изменить
+            -})
+  #over.hide
+  .form.hide
+    form#changeUser(action='userList/changeUser' method='post')
+      .text Измените данные пользователя
+      input(type='number' name='id' placeholder='id' required='')
+      input(type='text' name='name' placeholder='Имя' required='')
+      input(type='text' name='login' placeholder='Логин' required='')
+      input(type='email' name='email' placeholder='email' required='')
+      select(name='role')
+        -roles.forEach(function(e){
+          option(value ='' + e.id) #{e.descr}
+        -})
+      input(type='submit' value='Изменить')

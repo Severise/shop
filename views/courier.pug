@@ -1,0 +1,18 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title #{username}
+  link(rel='stylesheet' href='main.css')
+  link(href='https://fonts.googleapis.com/css?family=Amaranth|Philosopher&display=swap' rel='stylesheet')
+  script(src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js')
+  script(type='text/javascript' src='main.js')
+body
+  include includes/header
+  .body
+    .wrap
+      h2 Возможности
+      include includes/messages
+      div
+        ul
+          a(href='/orderList')
+            li#orderList Просмотреть заказы

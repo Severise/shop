@@ -1,0 +1,48 @@
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>username</title>
+    <link rel="stylesheet" href="main.css">
+    </link>
+    <link href="https://fonts.googleapis.com/css?family=Amaranth|Philosopher&display=swap" rel="stylesheet">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</head>
+
+<body>
+    <div class="head">
+        <div class="logo"><a href="/">SiteToRunGoods</a></div>
+        <a href="/logout"><img id="logout" src="logout.png" alt="logout" /></a>
+        <div id="profile">username</div>
+    </div>
+    <div class="body">
+        <div class="wrap">
+            <h2>Options</h2>
+            <div>
+                <ul>
+                    <a href="/goodList">
+                        <li id="goodList">Список товаров</li>
+                        <li id="addGood">Создать заказ</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="over" class="hide"></div>
+    <div class="form hide">
+        <form action="admin/addGood" id="addG" method='post'>
+            <div class="text">Введите данные товара</div>
+            <input type="text" name="name" placeholder="Название" required>
+            <input type="text" name="art" placeholder="Артикул" required>
+            <input type="number" name="size" placeholder="Размер" required>
+            <input type="number" name="quantity" placeholder="Количество" required>
+            <input type="number" name="price" placeholder="Цена" required>
+            <input type="text" name="img" placeholder="Ссылка на картинку" required>
+            <input type="submit" value="Добавить">
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>

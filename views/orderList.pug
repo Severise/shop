@@ -1,0 +1,68 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title Список заказов
+  link(rel='stylesheet' href='main.css')
+  link(href='https://fonts.googleapis.com/css?family=Amaranth|Philosopher&display=swap' rel='stylesheet')
+  script(src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js')
+  script(type='text/javascript' src='main.js')
+body
+  .head
+    include includes/header
+  .body
+    .wrap
+      h2 Заказы
+      include includes/messages
+      -if(!orders[0])
+        div Ничего не найдено
+      -else
+        table
+          thead
+            tr
+              td id
+              td Покупатель
+              td.address Адрес доставки
+              td Дата
+              td Статус
+              td Сумма
+              td Собрал
+              td Курьер
+              td Подробнее
+              td.add Дополнительно
+              td#openAdd &lt;
+          tbody
+            -orders.forEach(function(e){
+              tr
+                td #{e.id}
+                td #{e.customer}
+                td.address #{e.address}
+                td #{e.date}
+                td #{e.state}
+                td #{e.sum}
+                td #{e.user}
+                td #{e.courier}
+                td.add #{e.additional}
+                td 
+                    a(href="/orderCard?id="+e.id) Чек
+                td Изменить
+            -})
+  #over.hide
+  .form.hide
+    form#changeOrder(action='orderList/changeOrder' method='post')
+      .text Измените данные заказа
+      input(type='number' name='id' placeholder='id' required='')
+      -if(role != 'courier')
+        input(type='text' name='address' placeholder='Адрес' required='')
+      select(name='courier')
+        option(value='0') Выберите курьера
+        -couriers.forEach(function(e){
+          option(value ='' + e.id) #{e.name}
+        -})
+      select(name='state')
+        option(value='0') Статус
+        -states.forEach(function(e){
+          option(value ='' + e.id) #{e.state}
+        -})
+      -if(role != 'courier')
+        input(type='text' name='additional' placeholder='Дополнительно')
+      input(type='submit' value='Изменить')
